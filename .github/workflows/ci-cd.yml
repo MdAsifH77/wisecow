@@ -6,6 +6,21 @@ on:
       - main
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:  # ✅ Correct indentation
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Docker image
+        run: docker build -t wisecow-app .
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     
