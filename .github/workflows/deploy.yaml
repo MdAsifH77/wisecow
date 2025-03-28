@@ -17,8 +17,8 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t MdAsifH77/wisecow:latest .
-          docker push MdAsifH77/wisecow:latest
+          docker build -t docker.io/mdasifh77/wisecow:latest .
+          docker push docker.io/mdasifh77/wisecow:latest
 
   deploy:
     needs: build
@@ -31,7 +31,7 @@ jobs:
 
       - name: Apply Kubernetes manifests
         run: |
-          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > kubeconfig
-          export KUBECONFIG=kubeconfig
+          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > kubeconfig.yaml
+          export KUBECONFIG=kubeconfig.yaml
           kubectl apply -f deployment.yaml
           kubectl apply -f service.yaml
